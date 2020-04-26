@@ -71,7 +71,7 @@ public class phone_auth extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                          //   FirebaseUser user = task.getResult().getUser();
                            // Toast.makeText(getApplicationContext(),"Login Successful", Toast.LENGTH_LONG).show();
-                            Intent intents = new Intent(phone_auth.this, patient_details.class);
+                            Intent intents = new Intent(phone_auth.this, doctor_List.class);
                             startActivity(intents);
 
                             // ...

@@ -79,7 +79,7 @@ public class doctor_List extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         int position =  getAdapterPosition();
-                        Intent intent = new Intent(doctor_List.this, booking_confirm.class);
+                        Intent intent = new Intent(doctor_List.this, patient_details.class);
                         intent.putExtra("name", name.getText().toString());
                         intent.putExtra("gender", gender.getText().toString());
                         startActivity(intent);

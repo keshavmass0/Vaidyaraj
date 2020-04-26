@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class patient_details extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class patient_details extends AppCompatActivity {
     RadioButton mMale, mFemale;
     Button mButtonSubmit;
     String selectedGender;
+    String name1, gender1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,5 +44,21 @@ public class patient_details extends AppCompatActivity {
             //    startActivity(LoginIntent);
             }
         });
+
+        name1 = getIntent().getStringExtra("name");
+        gender1 = getIntent().getStringExtra("gender");
+
+/*
+        TextView name, gender;
+        String name1, gender1;
+        name = findViewById(R.id.name);
+        gender = findViewById(R.id.gender);
+
+        name1 = getIntent().getStringExtra("name");
+        gender1 = getIntent().getStringExtra("gender");
+
+        name.setText(name1);
+        gender.setText(gender1);
+*/
     }
 }
