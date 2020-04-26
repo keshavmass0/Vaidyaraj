@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Vaidyaraj</string>
+    <string-array name="programming_languages">
+        <item>c</item>
+        <item>c++</item>
+        <item>java</item>
+    </string-array>
+    <string-array name="description">
+        <item> random description </item>
+        <item> random description </item>
+        <item> random description </item>
+    </string-array>
+</resources>

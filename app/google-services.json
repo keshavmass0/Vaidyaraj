@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "833510064780",
+    "firebase_url": "https://vaidyaraj-c2ffb.firebaseio.com",
+    "project_id": "vaidyaraj-c2ffb",
+    "storage_bucket": "vaidyaraj-c2ffb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833510064780:android:e99a9c374fc419b149b1a9",
+        "android_client_info": {
+          "package_name": "com.example.vaidyaraj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833510064780-7o0g519f92ilbcf9m899i8bstok3hihk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vaidyaraj",
+            "certificate_hash": "d38d9c5a3ad6e4b0abe96d729fcb481d1a6f7fe3"
+          }
+        },
+        {
+          "client_id": "833510064780-en8gf52ki1a9d55a8rebvi8l77lb4v31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYA_yQbajO9r4hQxTi8MmZhritlqqP2uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833510064780-en8gf52ki1a9d55a8rebvi8l77lb4v31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:background="#123444"
+    tools:context=".registerActivity">
+
+    <EditText
+        android:id="@+id/editText_username_reg"
+        android:layout_width="191dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/user1"
+        android:text="Mobile Number" />
+
+    <EditText
+        android:id="@+id/editText_password_reg"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Password Please"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/pass"
+        android:layout_gravity="center_horizontal"
+        />
+    <EditText
+        android:id="@+id/editText_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:text="confirm_Password"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/pass"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+    <Button
+        android:id="@+id/button_register_reg"
+        android:layout_width="108dp"
+        android:layout_height="66dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="Register"
+        tools:layout_editor_absoluteX="193dp"
+        tools:layout_editor_absoluteY="298dp" />
+
+
+</LinearLayout>
