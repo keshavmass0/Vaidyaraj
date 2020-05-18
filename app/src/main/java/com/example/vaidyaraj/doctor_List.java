@@ -23,6 +23,7 @@ public class doctor_List extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     RecyclerView recyclerView;
     FirestoreRecyclerAdapter adapter;
+    String documentId;
 
  /*   String s1[];
     String s2[];
@@ -53,9 +54,24 @@ public class doctor_List extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull doctorsViewHolder holder, int position, @NonNull doctors_Model model) {
+            protected void onBindViewHolder(@NonNull final doctorsViewHolder holder, final int position, @NonNull final doctors_Model model) {
                 holder.name.setText(model.getName());
                 holder.gender.setText(model.getGender());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        documentId = getSnapshots().getSnapshot(position).getId();
+                        //long ss = model.getPatient_limit();
+                        Intent intent = new Intent(doctor_List.this, patient_details.class);
+                        intent.putExtra("name", holder.name.getText().toString());
+                        intent.putExtra("gender", holder.gender.getText().toString());
+                        intent.putExtra("documentId", documentId);
+
+
+                        startActivity(intent);
+
+                    }
+                });
 
 
             }
@@ -75,15 +91,20 @@ public class doctor_List extends AppCompatActivity {
                 name = itemView.findViewById(R.id.textView_proglang);
                 gender = itemView.findViewById(R.id.textView2_description);
 
+
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int position =  getAdapterPosition();
-                        Intent intent = new Intent(doctor_List.this, patient_details.class);
+//                        int position =  getAdapterPosition();
+
+//                        The below commented code has been moved to on bind view holder method and is working fine as of now
+
+                       /* Intent intent = new Intent(doctor_List.this, patient_details.class);
                         intent.putExtra("name", name.getText().toString());
                         intent.putExtra("gender", gender.getText().toString());
+                        intent.putExtra("documentId", documentId);
                         startActivity(intent);
-                        }
+*/                        }
                 });
 
             }
