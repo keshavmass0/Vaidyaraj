@@ -66,8 +66,6 @@ public class doctor_List extends AppCompatActivity {
                         intent.putExtra("name", holder.name.getText().toString());
                         intent.putExtra("gender", holder.gender.getText().toString());
                         intent.putExtra("documentId", documentId);
-
-
                         startActivity(intent);
 
                     }

@@ -5,24 +5,38 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class patient_details extends AppCompatActivity {
@@ -31,11 +45,16 @@ public class patient_details extends AppCompatActivity {
     RadioButton mMale, mFemale;
     Button mButtonSubmit;
     String selectedGender, pName, pAge;
-    String name1, gender1, documentId;
-    String doc_details;
-    long documentId1;
-
+    String name1, gender1, documentId; //document ID can be used to identify the doctor
+    String doc_details, doc_date_booking;
+    double booking_total = 0, patient_limit = 0 ;
     static final String TAG = "MyActivity";
+    CollectionReference pat_ref;
+    Boolean nameChanged, ageChanged=false;
+    String book_number;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +66,9 @@ public class patient_details extends AppCompatActivity {
         mFemale = (RadioButton)findViewById(R.id.female);
         mButtonSubmit = (Button)findViewById(R.id.button_register_reg);
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        pat_ref = db.collection("patient_details");
         FirebaseFirestore firebaseFirestore;
+        mButtonSubmit.setEnabled(false);
 
 
         if (mMale.isChecked()) {
@@ -58,6 +79,9 @@ public class patient_details extends AppCompatActivity {
         name1 = getIntent().getStringExtra("name");
         gender1 = getIntent().getStringExtra("gender");
         documentId = getIntent().getStringExtra("documentId");
+
+        final String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        doc_date_booking = documentId + currentDate;
 
         //documentId1 = getIntent().getIntExtra("documentId", 0);
      //   documentId1 = getIntent().getLongExtra("documentID", (long) 0.0);
@@ -74,10 +98,45 @@ public class patient_details extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    Double value =  document.getDouble("patient_limit");
+                    patient_limit =  document.getDouble("patient_limit");
                     if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData() + "keshav" +  value);
-                    } else {
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData() + "keshav" +  patient_limit);
+
+/***************************************************************************************************************/
+                        db.collection("patient_details")
+                                .whereEqualTo("doc_date_booking", doc_date_booking)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                Log.d(TAG, document.getId() + " ====> " + document.getData());
+                                                booking_total = booking_total + 1;
+                                            }
+                                            Log.d(TAG, "Value" + booking_total);
+
+                                            Log.d(TAG, "patient_limit" + patient_limit + "booking_total" + booking_total);
+                                            if (  patient_limit < booking_total) {
+                                                Toast.makeText(getApplicationContext(), "Booking Limit over for the Doctor", Toast.LENGTH_LONG).show();;
+                                                LinearLayout layout = (LinearLayout) findViewById(R.id.linearlayout_patient_details);
+                                                for (int i = 0; i < layout.getChildCount(); i++) {
+                                                    View child = layout.getChildAt(i);
+                                                    child.setEnabled(false);
+                                                }
+                                            } else {}
+
+                                        } else {
+                                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });        //patient_limit = 2.0;                     booking_total = 10.0;
+                        Log.d(TAG, "patient_limit" + patient_limit + "booking_total" + booking_total);
+
+/***************************************************************************************************************/
+
+
+              } else {
                         Log.d(TAG, "No such document");
                     }
                 } else {
@@ -86,51 +145,121 @@ public class patient_details extends AppCompatActivity {
             }
         });
 
-        mButtonSubmit.setOnClickListener(new View.OnClickListener() {
+            // TO TEST IF THERE IS INPUT AND ENABLE BUTTON
+        mTextName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {              }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { validateFields();   }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                nameChanged = true;
+            }
+        });
+if (nameChanged = true) {
+    mTextAge.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            validateFields();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            ageChanged = true;
+        }
+    });
+
+
+
+
+
+
+}
+
+            mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-             //   Toast.makeText(getApplicationContext(), selectedGender,  Toast.LENGTH_LONG).show(); // print the value of selected super star
-                //    Intent LoginIntent = new Intent(patient_details.this, registerActivity.class);
-                                Toast.makeText(getApplicationContext(),  documentId, Toast.LENGTH_LONG).show();
+                if (booking_total < patient_limit) {
 
-                //    startActivity(LoginIntent);
-                pName = mTextName.getText().toString();
-                pAge = mTextAge.getText().toString();
-                user.put("name", pName);
-                user.put("age", pAge);
-                user.put("gender", selectedGender);
-                user.put("doctor-name", name1);
-                user.put("doctor-details", gender1);
+                    Toast.makeText(getApplicationContext(), documentId, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Your Booking number is " + book_number, Toast.LENGTH_LONG).show();
+                    //              String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
 
-                db.collection("patient_details")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                    pat_ref.whereEqualTo("state", "CA");
+                    pName = mTextName.getText().toString();
+                    pAge = mTextAge.getText().toString();
+                    user.put("name", pName);
+                    user.put("age", pAge);
+                    user.put("gender", selectedGender);
+                    user.put("doctor-name", name1);
+                    user.put("doctor-details", gender1);
+                    user.put("Booking_date", currentDate);
+                    user.put("doc_date_booking", doc_date_booking);
+
+
+                    db.collection("patient_details")
+                            .add(user)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    Log.d(TAG, "book_number  " + book_number);
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
+
+                    book_number = Double.toString(booking_total);
+                    Intent intent = new Intent(patient_details.this, booking_confirm.class);
+                    intent.putExtra("name", pName);
+                    intent.putExtra("book_number", book_number);
+                    startActivity(intent);
+
+
+                } else {
+                    /**************************************************************************************************************************/
+                    /* Below code snippet count total booking for today for particular doctor and disable UI incase of more than limit*/
+
+                }
+
             }
         });
 
-// Add a new document with a generated ID
-   /*     TextView name, gender;
-        String name1, gender1;
-        name = findViewById(R.id.name);
-        gender = findViewById(R.id.gender);
+    }
 
-        name1 = getIntent().getStringExtra("name");
-        gender1 = getIntent().getStringExtra("gender");
+    public void validateFields()
+    {
+        String nName = mTextName.getText().toString().trim();
+        String nAge = mTextAge.getText().toString().trim();
+        if(nName.isEmpty()){
 
-        name.setText(name1);
-        gender.setText(gender1);
-*/
+            mTextName.setError("Enter Valid Name");
+            mTextName.requestFocus();
+            mButtonSubmit.setEnabled(false);
+            return;
+            }
+        else
+            mButtonSubmit.setEnabled(true);
+
+        if(nAge.isEmpty()){
+            mTextAge.setError("Enter Valid Age");
+         //   mTextAge.requestFocus();
+            mButtonSubmit.setEnabled(false);
+            return;
+        }
+        else
+            mButtonSubmit.setEnabled(true);
     }
 }

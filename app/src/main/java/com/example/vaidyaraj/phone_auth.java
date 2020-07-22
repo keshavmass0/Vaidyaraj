@@ -24,7 +24,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 public class phone_auth extends AppCompatActivity {
- //   firebase.auth.languageCode = 'it';
     EditText editTextPhone, editTextCode;
     FirebaseAuth mAuth;
     String codeSent;
