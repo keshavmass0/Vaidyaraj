@@ -52,7 +52,7 @@ public class patient_details extends AppCompatActivity {
     CollectionReference pat_ref;
     Boolean nameChanged, ageChanged=false;
     String book_number;
-
+    int limit_check=0;
 
 
 
@@ -117,18 +117,20 @@ public class patient_details extends AppCompatActivity {
                                             Log.d(TAG, "Value" + booking_total);
 
                                             Log.d(TAG, "patient_limit" + patient_limit + "booking_total" + booking_total);
-                                            if (  patient_limit < booking_total) {
-                                                Toast.makeText(getApplicationContext(), "Booking Limit over for the Doctor", Toast.LENGTH_LONG).show();;
+                                            if (  patient_limit <= booking_total) {
                                                 LinearLayout layout = (LinearLayout) findViewById(R.id.linearlayout_patient_details);
                                                 for (int i = 0; i < layout.getChildCount(); i++) {
                                                     View child = layout.getChildAt(i);
                                                     child.setEnabled(false);
+                                                    Toast.makeText(getApplicationContext(), "Booking Limit over for the Doctor", Toast.LENGTH_SHORT).show();;
+
                                                 }
                                             } else {}
 
                                         } else {
                                             Log.d(TAG, "Error getting documents: ", task.getException());
                                         }
+                                        limit_check=1;
                                     }
                                 });        //patient_limit = 2.0;                     booking_total = 10.0;
                         Log.d(TAG, "patient_limit" + patient_limit + "booking_total" + booking_total);
@@ -221,6 +223,7 @@ if (nameChanged = true) {
                                 }
                             });
 
+                    book_number = book_number+1.0;
                     book_number = Double.toString(booking_total);
                     Intent intent = new Intent(patient_details.this, booking_confirm.class);
                     intent.putExtra("name", pName);
@@ -250,8 +253,7 @@ if (nameChanged = true) {
             mButtonSubmit.setEnabled(false);
             return;
             }
-        else
-            mButtonSubmit.setEnabled(true);
+
 
         if(nAge.isEmpty()){
             mTextAge.setError("Enter Valid Age");
@@ -259,7 +261,16 @@ if (nameChanged = true) {
             mButtonSubmit.setEnabled(false);
             return;
         }
-        else
-            mButtonSubmit.setEnabled(true);
+        else{
+            if(limit_check==0){
+            SystemClock.sleep(2000);
+            }
+
+            else
+                mButtonSubmit.setEnabled(true);
+        }
+
+
+
     }
 }
