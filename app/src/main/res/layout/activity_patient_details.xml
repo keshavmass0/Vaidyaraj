@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFB6C1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+ <ScrollView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/registration_scroll_view"
+     android:layout_alignParentTop="true"
+     android:layout_below="@+id/button_register_reg"
+     >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearlayout_patient_details"
     android:layout_width="match_parent"
@@ -9,9 +24,8 @@
     android:layout_gravity="center_horizontal"
     android:background="#FFB6C1"
     tools:context=".patient_details">
-   >
 
-    <EditText
+ <EditText
         android:id="@+id/editText_patient_name"
         android:layout_width="191dp"
         android:layout_height="60dp"
@@ -66,31 +80,30 @@
         android:textStyle="bold" />
     </RadioGroup>
 
-
-    <Button
-        android:id="@+id/button_register_reg"
-        android:layout_width="191dp"
-        android:layout_height="66dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="Submit Details"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="298dp" />
-
-
-     <TextView
-  android:id="@+id/name"
-  android:layout_width="135dp"
-  android:layout_height="45dp"
-  android:text="Welcome to the Jungle"
-     android:layout_gravity="center_horizontal"/>
-
  <TextView
-     android:id="@+id/gender"
-     android:layout_width="176dp"
-     android:layout_height="66dp"
-     android:layout_marginTop="80dp"
-     android:text="Welcome to the Jungle"
-     android:layout_gravity="center_horizontal"/>
+     android:id="@+id/editText_patient_age1"
+     android:layout_width="191dp"
+     android:layout_height="50dp"
+     android:layout_marginTop="50dp"
+     android:maxLength="2"
+     android:digits="1234567890"
+     android:layout_gravity="center_horizontal"
+     />
+
+
 
 </LinearLayout>
+
+ </ScrollView>
+ <Button
+     android:id="@+id/button_register_reg"
+     android:layout_width="match_parent"
+     android:layout_alignParentBottom="true"
+     android:layout_height="66dp"
+     android:layout_gravity="center_horizontal"
+     android:layout_marginTop="50dp"
+     android:text="Submit" />
+ <!--tools:layout_editor_absoluteX="193dp"
+ tools:layout_editor_absoluteY="298dp" -->
+
+</RelativeLayout>

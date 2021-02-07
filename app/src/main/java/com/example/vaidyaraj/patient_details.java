@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -53,7 +55,7 @@ public class patient_details extends AppCompatActivity {
     Boolean nameChanged, ageChanged=false;
     String book_number;
     int limit_check=0;
-
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -69,6 +71,7 @@ public class patient_details extends AppCompatActivity {
         pat_ref = db.collection("patient_details");
         FirebaseFirestore firebaseFirestore;
         mButtonSubmit.setEnabled(false);
+        mAuth = FirebaseAuth.getInstance();
 
 
         if (mMale.isChecked()) {
@@ -193,10 +196,11 @@ if (nameChanged = true) {
                     Toast.makeText(getApplicationContext(), documentId, Toast.LENGTH_LONG).show();
                     //Toast.makeText(getApplicationContext(), "Your Booking number is " + book_number, Toast.LENGTH_LONG).show();
                     //              String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
-
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
                     pat_ref.whereEqualTo("state", "CA");
                     pName = mTextName.getText().toString();
                     pAge = mTextAge.getText().toString();
+                    String currentUser1 = currentUser.getPhoneNumber();
                     user.put("name", pName);
                     user.put("age", pAge);
                     user.put("gender", selectedGender);
@@ -204,6 +208,9 @@ if (nameChanged = true) {
                     user.put("doctor-details", gender1);
                     user.put("Booking_date", currentDate);
                     user.put("doc_date_booking", doc_date_booking);
+                    user.put("Log_in_user", currentUser1);
+
+
 
 
                     db.collection("patient_details")
@@ -223,7 +230,8 @@ if (nameChanged = true) {
                                 }
                             });
 
-                    book_number = book_number+1.0;
+                    //book_number = book_number+2.0;
+                    booking_total = booking_total+1.0;
                     book_number = Double.toString(booking_total);
                     Intent intent = new Intent(patient_details.this, booking_confirm.class);
                     intent.putExtra("name", pName);

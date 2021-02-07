@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class booking_confirm extends AppCompatActivity {
@@ -24,16 +25,22 @@ public class booking_confirm extends AppCompatActivity {
 
         name.setText("Your appointment has been confirmed with name " + name1 + " and appointment number " + book_number);
 
+        findViewById(R.id.signOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+           //     FirebaseAuth.getInstance().signOut();
 
-
-
-
-
+            }
+        });
     }
+
+
+
+
     @Override
     public void onBackPressed() {
         Log.d("CDA", "onBackPressed Called");
-        Intent setIntent = new Intent(booking_confirm.this, MainActivity.class);
+        Intent setIntent = new Intent(booking_confirm.this, user_home1.class);
 
         startActivity(setIntent);
     }
