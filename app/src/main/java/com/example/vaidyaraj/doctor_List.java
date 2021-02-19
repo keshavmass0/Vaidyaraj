@@ -70,8 +70,6 @@ public class doctor_List extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         };
 

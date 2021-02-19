@@ -54,27 +54,6 @@ public class phone_auth extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    private void updateUI(@Nullable FirebaseUser account) {
-        if (account != null) {
-            Intent intents = new Intent(phone_auth.this, user_home1.class);
-            startActivity(intents);
-/*            mStatusTextView.setText(getString(R.string.signed_in_fmt, account.getDisplayName()));
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-  */      } else {
-/*            mStatusTextView.setText(R.string.signed_out);
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-  */      }
-    }
 
     private void verifySignInCode(){
         try {
