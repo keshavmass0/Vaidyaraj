@@ -180,13 +180,7 @@ if (nameChanged = true) {
         }
     });
 
-
-
-
-
-
 }
-
             mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,17 +195,19 @@ if (nameChanged = true) {
                     pName = mTextName.getText().toString();
                     pAge = mTextAge.getText().toString();
                     String currentUser1 = currentUser.getPhoneNumber();
+                    booking_total = booking_total+1.0;
+                    book_number = Double.toString(booking_total);
+
                     user.put("name", pName);
                     user.put("age", pAge);
                     user.put("gender", selectedGender);
-                    user.put("doctor-name", name1);
-                    user.put("doctor-details", gender1);
+                    user.put("doctor_name", name1);
+                    user.put("doctor_details", gender1);
                     user.put("Booking_date", currentDate);
                     user.put("doc_date_booking", doc_date_booking);
                     user.put("Log_in_user", currentUser1);
-
-
-
+                    user.put("Booking_number", book_number);
+                    user.put("Login_user_date_booking", currentUser1+currentDate);
 
                     db.collection("patient_details")
                             .add(user)
@@ -231,8 +227,6 @@ if (nameChanged = true) {
                             });
 
                     //book_number = book_number+2.0;
-                    booking_total = booking_total+1.0;
-                    book_number = Double.toString(booking_total);
                     Intent intent = new Intent(patient_details.this, booking_confirm.class);
                     intent.putExtra("name", pName);
                     intent.putExtra("book_number", book_number);
@@ -241,7 +235,6 @@ if (nameChanged = true) {
 
                 } else {
                     /**************************************************************************************************************************/
-                    /* Below code snippet count total booking for today for particular doctor and disable UI incase of more than limit*/
 
                 }
 
