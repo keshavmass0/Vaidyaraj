@@ -25,13 +25,19 @@ public class booking_confirm extends AppCompatActivity {
 
         name.setText("Your appointment has been confirmed with name " + name1 + " and appointment number " + book_number);
 
-        findViewById(R.id.signOut).setOnClickListener(new View.OnClickListener() {
+     /*   findViewById(R.id.signOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
            //     FirebaseAuth.getInstance().signOut();
+        //        Intent intents = new Intent(booking_confirm.this, user_home1.class);
+        //        startActivity(intents);
+            // m.setText(getString(R.string.signed_in_fmt, account.getDisplayName()));
+        //    findViewById(R.id.book_appointment).setVisibility(View.GONE);
+           // findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+
 
             }
-        });
+        }); */
     }
 
 
@@ -41,7 +47,6 @@ public class booking_confirm extends AppCompatActivity {
     public void onBackPressed() {
         Log.d("CDA", "onBackPressed Called");
         Intent setIntent = new Intent(booking_confirm.this, user_home1.class);
-
         startActivity(setIntent);
     }
 }
