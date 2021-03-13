@@ -4,6 +4,7 @@ public class doctors_Model {
 
     String name;
     String gender ;
+    String Mobile_Number;
 
     long patient_limit;
     public long getPatient_limit() {
@@ -12,9 +13,10 @@ public class doctors_Model {
 
 
     public doctors_Model() {}
-    public doctors_Model(String name, String gender) {
+    public doctors_Model(String name, String gender, String Mobile_Number) {
             this.name = name;
             this.gender = gender;
+            this.Mobile_Number = Mobile_Number;
     }
 
     public String getName() {
@@ -32,6 +34,14 @@ public class doctors_Model {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getMobile_Number() {
+        return Mobile_Number;
+    }
+
+    public void setMobile_Number(String Mobile_Number) {
+        this.Mobile_Number = Mobile_Number;
     }
 
 }

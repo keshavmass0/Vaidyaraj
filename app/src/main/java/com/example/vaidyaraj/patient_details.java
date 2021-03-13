@@ -48,7 +48,7 @@ public class patient_details extends AppCompatActivity {
     Button mButtonSubmit;
     String selectedGender, pName, pAge;
     String name1, gender1, documentId; //document ID can be used to identify the doctor
-    String doc_details, doc_date_booking;
+    String doc_details, doc_date_booking, doc_phone_date_booking, Mobile_Number;
     double booking_total = 0, patient_limit = 0 ;
     static final String TAG = "MyActivity";
     CollectionReference pat_ref;
@@ -82,9 +82,11 @@ public class patient_details extends AppCompatActivity {
         name1 = getIntent().getStringExtra("name");
         gender1 = getIntent().getStringExtra("gender");
         documentId = getIntent().getStringExtra("documentId");
+        Mobile_Number = getIntent().getStringExtra("phone");
 
         final String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         doc_date_booking = documentId + currentDate;
+        doc_phone_date_booking = Mobile_Number + currentDate;
 
         //documentId1 = getIntent().getIntExtra("documentId", 0);
      //   documentId1 = getIntent().getLongExtra("documentID", (long) 0.0);
@@ -208,6 +210,8 @@ if (nameChanged = true) {
                     user.put("Log_in_user", currentUser1);
                     user.put("Booking_number", book_number);
                     user.put("Login_user_date_booking", currentUser1+currentDate);
+                    user.put("Doc_Phone_Date_booking", doc_phone_date_booking);
+                    Log.d(TAG, "Doc_Phone_Date_booking " + doc_phone_date_booking);
 
                     db.collection("patient_details")
                             .add(user)
