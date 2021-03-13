@@ -62,11 +62,14 @@ public class doctor_List extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         documentId = getSnapshots().getSnapshot(position).getId();
+                        String Mobile_Number = model.getMobile_Number();
+                        Log.d("hi", "Inside doctor list" + Mobile_Number);
                         //long ss = model.getPatient_limit();
                         Intent intent = new Intent(doctor_List.this, patient_details.class);
                         intent.putExtra("name", holder.name.getText().toString());
                         intent.putExtra("gender", holder.gender.getText().toString());
                         intent.putExtra("documentId", documentId);
+                        intent.putExtra("phone", Mobile_Number);
                         startActivity(intent);
 
                     }
