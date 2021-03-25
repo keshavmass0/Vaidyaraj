@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Vaidyaraj</string>
+    <string name="my_booking">My Booking</string>
+    <string name="book_appointment">Book Appointment</string>
     <string-array name="programming_languages">
         <item>c</item>
         <item>c++</item>
