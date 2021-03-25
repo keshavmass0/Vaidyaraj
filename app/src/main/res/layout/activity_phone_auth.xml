@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Phone Number"
-        android:text="+91 9811018970"/>
+        android:hint="Phone Number(With Country Code)"
+        android:text="+91 "/>
 
     <Button
         android:id="@+id/buttonGetVerificationCode"
@@ -32,7 +32,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Verification Code"
-        android:text="234567"/>
+        android:text=""/>
 
 
     <Button
