@@ -2,10 +2,25 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+
+    signingConfigs {
+        release {
+            storeFile file('D:\\Vaidyaraj\\app signing key\\upload-keystore.jks')
+            storePassword 'Kes111mas11*'
+            keyAlias = 'key0'
+            keyPassword 'Kes111mas11*'
+            v2SigningEnabled true
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.vaidyaraj"
+        applicationId "com.vr.vaidyaraj"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -17,7 +32,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+
     }
 }
 
@@ -25,7 +42,7 @@ android {
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.4.0')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.firebase:firebase-firestore:17.1.2'
     testImplementation 'junit:junit:4.12'
@@ -44,6 +61,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.0'
     //  implementation 'com.google.api-client:google-api-client:1.23.0'
+    implementation 'androidx.browser:browser:1.2.0'
 
     //implementation 'com.google.android.gms:play-services:11.8.0'
 }
