@@ -5,9 +5,9 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('D:\\Vaidyaraj\\app signing key\\upload-keystore.jks')
+            storeFile file('D:\\Vaidyaraj\\app signing key\\keystore.jks')
             storePassword 'Kes111mas11*'
-            keyAlias = 'key0'
+            keyAlias = 'upload'
             keyPassword 'Kes111mas11*'
             v2SigningEnabled true
 
@@ -23,14 +23,14 @@ android {
         applicationId "com.vr.vaidyaraj"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true  //for enabling multidex
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
