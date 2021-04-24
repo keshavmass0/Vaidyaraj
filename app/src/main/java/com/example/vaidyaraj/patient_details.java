@@ -1,5 +1,6 @@
 package com.example.vaidyaraj;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,7 +41,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
+@Keep
 public class patient_details extends AppCompatActivity {
 
     EditText mTextName, mTextAge;

@@ -60,6 +60,14 @@
           }
         },
         {
+          "client_id": "833510064780-ri65neho9ag96lc4h469toj5mlltcr7f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vaidyaraj",
+            "certificate_hash": "7102106d9db363c279d6be2a73c18a55d9a87569"
+          }
+        },
+        {
           "client_id": "833510064780-en8gf52ki1a9d55a8rebvi8l77lb4v31.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -155,6 +163,51 @@
           "android_info": {
             "package_name": "com.vr.vaidyaraj",
             "certificate_hash": "e5b6fd211541e4c549152bfe8d278c8a95aa5eef"
+          }
+        },
+        {
+          "client_id": "833510064780-t281ksk656c14f3srp925026maibvn46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vr.vaidyaraj",
+            "certificate_hash": "7102106d9db363c279d6be2a73c18a55d9a87569"
+          }
+        },
+        {
+          "client_id": "833510064780-en8gf52ki1a9d55a8rebvi8l77lb4v31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYA_yQbajO9r4hQxTi8MmZhritlqqP2uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833510064780-en8gf52ki1a9d55a8rebvi8l77lb4v31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833510064780:android:cef3b7b51fc9e4f749b1a9",
+        "android_client_info": {
+          "package_name": "com.vr.vaidyaraj_doc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833510064780-qs4hlvncr534minmiff67iidjl8si41r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vr.vaidyaraj_doc",
+            "certificate_hash": "7102106d9db363c279d6be2a73c18a55d9a87569"
           }
         },
         {

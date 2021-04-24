@@ -1,5 +1,6 @@
 package com.example.vaidyaraj;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.multidex.MultiDexApplication;
@@ -19,7 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
+@Keep
 public class doctor_List extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     RecyclerView recyclerView;
