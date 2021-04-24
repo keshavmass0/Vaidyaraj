@@ -1,5 +1,6 @@
 package com.example.vaidyaraj;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.multidex.MultiDexApplication;
@@ -19,7 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
+@Keep
 public class doctor_List extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     RecyclerView recyclerView;
@@ -63,6 +64,7 @@ public class doctor_List extends AppCompatActivity {
                     public void onClick(View v) {
                         documentId = getSnapshots().getSnapshot(position).getId();
                         String Mobile_Number = model.getMobile_Number();
+                        String Visit_time = model.getVisit_time();
                         Log.d("hi", "Inside doctor list" + Mobile_Number);
                         //long ss = model.getPatient_limit();
                         Intent intent = new Intent(doctor_List.this, patient_details.class);
@@ -70,6 +72,7 @@ public class doctor_List extends AppCompatActivity {
                         intent.putExtra("gender", holder.gender.getText().toString());
                         intent.putExtra("documentId", documentId);
                         intent.putExtra("phone", Mobile_Number);
+                        intent.putExtra("Visit_time", Visit_time);
                         startActivity(intent);
 
                     }

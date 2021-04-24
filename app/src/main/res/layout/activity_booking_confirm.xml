@@ -4,21 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".booking_confirm">
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="362dp"
-        android:layout_height="279dp"
-        android:baselineAligned="false"
-        android:text="" />
 
     <Button
         android:id="@+id/signOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Out"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="303dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginRight="50dp"
+        android:text=""
+        android:textColor="#03396c " />
+
+    <TextView
+        android:id="@+id/visit_time"
+        android:layout_width="303dp"
+        android:layout_height="59dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text=""
+        android:textColor="#03396c "
+        android:textStyle="bold" />
 </LinearLayout>

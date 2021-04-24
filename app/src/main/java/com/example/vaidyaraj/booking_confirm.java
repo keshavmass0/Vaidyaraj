@@ -10,21 +10,24 @@ import android.widget.TextView;
 
 public class booking_confirm extends AppCompatActivity {
 
-    TextView name, ages;
+    TextView name, visit_time;
     String name1;
-    String book_number;
+    String book_number, Visit_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_confirm);
 
         name = findViewById(R.id.name);
+        visit_time= findViewById(R.id.visit_time);
 
         name1 = getIntent().getStringExtra("name");
         book_number = getIntent().getStringExtra("book_number");
+        Visit_time = getIntent().getStringExtra("Visit_time");
 
-        name.setText("Your appointment has been confirmed with name " + name1 + " and appointment number " + book_number);
-
+        name.setText("Your appointment has been confirmed with name " + name1 + " and appointment number " + book_number
+                );
+        visit_time.setText("\nPlease make sure to Reach hospital before " + Visit_time );
      /*   findViewById(R.id.signOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

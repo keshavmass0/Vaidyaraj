@@ -1,10 +1,14 @@
 package com.example.vaidyaraj;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class doctors_Model {
 
     String name;
     String gender ;
-    String Mobile_Number;
+    String mobile_Number;
+    String visit_time;
 
     long patient_limit;
     public long getPatient_limit() {
@@ -13,10 +17,11 @@ public class doctors_Model {
 
 
     public doctors_Model() {}
-    public doctors_Model(String name, String gender, String Mobile_Number) {
+    public doctors_Model(String name, String gender, String Mobile_Number, String Visit_time) {
             this.name = name;
             this.gender = gender;
-            this.Mobile_Number = Mobile_Number;
+            this.mobile_Number = Mobile_Number;
+            this.visit_time = Visit_time;
     }
 
     public String getName() {
@@ -37,11 +42,14 @@ public class doctors_Model {
     }
 
     public String getMobile_Number() {
-        return Mobile_Number;
+        return mobile_Number;
     }
 
     public void setMobile_Number(String Mobile_Number) {
-        this.Mobile_Number = Mobile_Number;
+        this.mobile_Number = Mobile_Number;
+    }
+    public String getVisit_time() {
+        return visit_time;
     }
 
 }

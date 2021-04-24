@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class myadaptor1 extends RecyclerView.Adapter<myadaptor1.MyViewFolder> {
 
-    String data1[], data2[];
-    int images[] ;
-    Context context;
+    public String data1[], data2[];
+    public int images[] ;
+    public Context context;
 
     public myadaptor1(Context ct, String s1[], String s2[], int img[]){
         context = ct;
