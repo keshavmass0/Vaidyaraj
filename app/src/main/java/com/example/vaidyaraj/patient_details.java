@@ -50,6 +50,7 @@ public class patient_details extends AppCompatActivity {
     String selectedGender, pName, pAge;
     String name1, gender1, documentId; //document ID can be used to identify the doctor
     String Visit_time, doc_date_booking, doc_phone_date_booking, Mobile_Number;
+    double fee=0;
     double booking_total = 0, patient_limit = 0 ;
     static final String TAG = "MyActivity";
     CollectionReference pat_ref;
@@ -85,6 +86,7 @@ public class patient_details extends AppCompatActivity {
         documentId = getIntent().getStringExtra("documentId");
         Mobile_Number = getIntent().getStringExtra("phone");
         Visit_time = getIntent().getStringExtra("Visit_time");
+        fee = getIntent().getDoubleExtra("fee", fee);
 
         final String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         doc_date_booking = documentId + currentDate;
@@ -216,30 +218,64 @@ if (nameChanged = true) {
                     user.put("Visit_time", currentDate+" at "+Visit_time);
 
                     Log.d(TAG, "Doc_Phone_Date_booking " + doc_phone_date_booking);
+                    if((fee!=0.0)) {
 
-                    db.collection("patient_details")
-                            .add(user)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                    Log.d(TAG, "book_number  " + book_number);
+                        Log.d(TAG, "inside payment  " + fee);
 
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error adding document", e);
-                                }
-                            });
 
+                        db.collection("patient_details")
+                                .add(user)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                        Log.d(TAG, "book_number  " + book_number);
+                                        Intent intents1 = new Intent(patient_details.this, payment.class);
+                                        intents1.putExtra("name", pName);
+                                        intents1.putExtra("book_number", book_number);
+                                        intents1.putExtra("Visit_time", Visit_time);
+                                        intents1.putExtra("doc_id", documentReference.getId());
+                                        //startActivity(intents1);
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
+
+                    } else {
+                        db.collection("patient_details")
+                                .add(user)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                        Log.d(TAG, "book_number  " + book_number);
+                                        Intent intents1 = new Intent(patient_details.this, booking_confirm.class);
+                                        intents1.putExtra("name", pName);
+                                        intents1.putExtra("book_number", book_number);
+                                        intents1.putExtra("Visit_time", Visit_time);
+                                        intents1.putExtra("doc_id", documentReference.getId());
+                                        startActivity(intents1);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
+                    }
                     //book_number = book_number+2.0;
-                    Intent intent = new Intent(patient_details.this, booking_confirm.class);
+
+                    /*Intent intent = new Intent(patient_details.this, booking_confirm.class);
                     intent.putExtra("name", pName);
                     intent.putExtra("book_number", book_number);
                     intent.putExtra("Visit_time", Visit_time);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 } else {
                     /**************************************************************************************************************************/
 

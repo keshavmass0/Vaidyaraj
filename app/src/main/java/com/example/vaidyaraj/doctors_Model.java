@@ -1,5 +1,7 @@
 package com.example.vaidyaraj;
 
+import android.util.Log;
+
 import androidx.annotation.Keep;
 
 @Keep
@@ -9,6 +11,13 @@ public class doctors_Model {
     String gender ;
     String mobile_Number;
     String visit_time;
+    Double fee;
+
+
+    public Double getFee() {
+        return fee;
+    }
+
 
     long patient_limit;
     public long getPatient_limit() {

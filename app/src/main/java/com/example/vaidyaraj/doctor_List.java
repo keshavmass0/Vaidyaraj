@@ -65,6 +65,7 @@ public class doctor_List extends AppCompatActivity {
                         documentId = getSnapshots().getSnapshot(position).getId();
                         String Mobile_Number = model.getMobile_Number();
                         String Visit_time = model.getVisit_time();
+                        Double fee = model.getFee();
                         Log.d("hi", "Inside doctor list" + Mobile_Number);
                         //long ss = model.getPatient_limit();
                         Intent intent = new Intent(doctor_List.this, patient_details.class);
@@ -73,6 +74,7 @@ public class doctor_List extends AppCompatActivity {
                         intent.putExtra("documentId", documentId);
                         intent.putExtra("phone", Mobile_Number);
                         intent.putExtra("Visit_time", Visit_time);
+                        intent.putExtra("fee", fee);
                         startActivity(intent);
 
                     }

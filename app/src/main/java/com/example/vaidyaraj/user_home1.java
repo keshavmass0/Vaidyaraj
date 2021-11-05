@@ -135,6 +135,12 @@ public class user_home1 extends AppCompatActivity {
                    }
         });
 
+/*        Button pmt = findViewById(R.id.payment);
+        pmt.setOnClickListener(view -> {
+
+            Intent intents1 = new Intent(user_home1.this, payment.class);
+            startActivity(intents1);
+        });*/
     }
     public  void openDialog(String msg){
       //  myDialog myDialog1 = new myDialog();

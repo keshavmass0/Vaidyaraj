@@ -4,7 +4,9 @@ package com.example.vaidyaraj;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -33,11 +35,12 @@ public class contact_us extends AppCompatActivity {
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();}
     }
 
-    public void openWhatsapp(View v){
+
+  /*  public void openWhatsapp(View v){
         String number = "+91 9540707132";
         String url = "https://api.whatsapp.com/send?phone="+number;
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
-    }
+    }*/
 }
