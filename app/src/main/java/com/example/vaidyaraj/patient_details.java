@@ -193,7 +193,7 @@ if (nameChanged = true) {
 
                 if (booking_total < patient_limit) {
 
-                    Toast.makeText(getApplicationContext(), documentId, Toast.LENGTH_LONG).show();
+                  /*  Toast.makeText(getApplicationContext(), documentId, Toast.LENGTH_LONG).show();
                     //Toast.makeText(getApplicationContext(), "Your Booking number is " + book_number, Toast.LENGTH_LONG).show();
                     //              String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
                     FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -217,25 +217,30 @@ if (nameChanged = true) {
                     user.put("Doc_Phone_Date_booking", doc_phone_date_booking);
                     user.put("Visit_time", currentDate+" at "+Visit_time);
 
-                    Log.d(TAG, "Doc_Phone_Date_booking " + doc_phone_date_booking);
+                    Log.d(TAG, "Doc_Phone_Date_booking " + doc_phone_date_booking);*/
                     if((fee!=0.0)) {
 
                         Log.d(TAG, "inside payment  " + fee);
 
+                        Intent intents1 = new Intent(patient_details.this, payment.class);
+                        intents1.putExtra("fee",fee);
 
-                        db.collection("patient_details")
+                        //       intents1.putExtra("name", pName);
+                     //   intents1.putExtra("book_number", book_number);
+                   //     intents1.putExtra("Visit_time", Visit_time);
+                //        intents1.putExtra("doc_id", documentReference.getId());
+                 //       startActivity(intents1);
+
+                        startActivityForResult(intents1,2);
+
+
+                /*        db.collection("patient_details")
                                 .add(user)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                        Log.d(TAG, "book_number  " + book_number);
-                                        Intent intents1 = new Intent(patient_details.this, payment.class);
-                                        intents1.putExtra("name", pName);
-                                        intents1.putExtra("book_number", book_number);
-                                        intents1.putExtra("Visit_time", Visit_time);
-                                        intents1.putExtra("doc_id", documentReference.getId());
-                                        //startActivity(intents1);
+                                        Log.d(TAG, "book_number Back from Payemnt function " + book_number);
 
                                     }
                                 })
@@ -244,15 +249,45 @@ if (nameChanged = true) {
                                     public void onFailure(@NonNull Exception e) {
                                         Log.w(TAG, "Error adding document", e);
                                     }
-                                });
+                                });*/
 
                     } else {
+
+                        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        pat_ref.whereEqualTo("state", "CA");
+                        pName = mTextName.getText().toString();
+                        pAge = mTextAge.getText().toString();
+                        String currentUser1 = currentUser.getPhoneNumber();
+                        booking_total = booking_total+1.0;
+                        book_number = Double.toString(booking_total);
+
+                        user.put("name", pName);
+                        user.put("age", pAge);
+                        user.put("gender", selectedGender);
+                        user.put("doctor_name", name1);
+                        user.put("doctor_details", gender1);
+                        user.put("Booking_date", currentDate);
+                        user.put("doc_date_booking", doc_date_booking);
+                        user.put("Log_in_user", currentUser1);
+                        user.put("Booking_number", book_number);
+                        user.put("Login_user_date_booking", currentUser1+currentDate);
+                        user.put("Doc_Phone_Date_booking", doc_phone_date_booking);
+                        user.put("Visit_time", currentDate+" at "+Visit_time);
+
+                        Log.d(TAG, "Doc_Phone_Date_booking " + doc_phone_date_booking);
+                        Log.d(TAG, "back from payment  " + fee);
+
+
+
+
+
                         db.collection("patient_details")
                                 .add(user)
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
-                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                         Log.d(TAG, "book_number  " + book_number);
                                         Intent intents1 = new Intent(patient_details.this, booking_confirm.class);
                                         intents1.putExtra("name", pName);
@@ -297,8 +332,6 @@ if (nameChanged = true) {
             mButtonSubmit.setEnabled(false);
             return;
             }
-
-
         if(nAge.isEmpty()){
             mTextAge.setError("Enter Valid Age");
          //   mTextAge.requestFocus();
@@ -309,12 +342,78 @@ if (nameChanged = true) {
             if(limit_check==0){
             SystemClock.sleep(2000);
             }
-
             else
                 mButtonSubmit.setEnabled(true);
-        }
+        } }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2)
+        {final FirebaseFirestore db = FirebaseFirestore.getInstance();
+            final Map<String, Object> user = new HashMap<>();
+            if (booking_total < patient_limit) {
+
+            Toast.makeText(getApplicationContext(), documentId, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Booking number is " + book_number, Toast.LENGTH_LONG).show();
+            // String currentDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
+             String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            pat_ref.whereEqualTo("state", "CA");
+            pName = mTextName.getText().toString();
+            pAge = mTextAge.getText().toString();
+            String currentUser1 = currentUser.getPhoneNumber();
+            booking_total = booking_total+1.0;
+            book_number = Double.toString(booking_total);
+
+            user.put("name", pName);
+            user.put("age", pAge);
+            user.put("gender", selectedGender);
+            user.put("doctor_name", name1);
+            user.put("doctor_details", gender1);
+            user.put("Booking_date", currentDate);
+            user.put("doc_date_booking", doc_date_booking);
+            user.put("Log_in_user", currentUser1);
+            user.put("Booking_number", book_number);
+            user.put("Login_user_date_booking", currentUser1+currentDate);
+            user.put("Doc_Phone_Date_booking", doc_phone_date_booking);
+            user.put("Visit_time", currentDate+" at "+Visit_time);
+
+            Log.d(TAG, "Doc_Phone_Date_booking " + doc_phone_date_booking);
+                Log.d(TAG, "back from payment  " + fee);
+
+
+                db.collection("patient_details")
+                    .add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            Intent intents1 = new Intent(patient_details.this, booking_confirm.class);
+                            intents1.putExtra("name", pName);
+                            intents1.putExtra("book_number", book_number);
+                            intents1.putExtra("Visit_time", Visit_time);
+                            intents1.putExtra("doc_id", documentReference.getId());
+                            startActivity(intents1);
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
 
 
 
+            }
+        else {
+                System.exit(0);
+
+            }}
     }
 }

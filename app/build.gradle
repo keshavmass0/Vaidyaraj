@@ -22,9 +22,9 @@ android {
     defaultConfig {
         applicationId "com.vr.vaidyaraj"
         minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 12
-        versionName "12.0"
+        targetSdkVersion 30
+        versionCode 13
+        versionName "13.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true  //for enabling multidex
     }
